@@ -1,0 +1,32 @@
+{
+  "name": "vixlink",
+  "version": "0.0.1",
+  "description": "A basic branded link and link shortner with a simple web UI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "link",
+    "branded",
+    "shortener"
+  ],
+  "author": "Erica Kovac <ekovac@binaryden.net> (https://binaryden.net/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekovac/vixlink.git"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@types/express": "^4.17.6",
+    "@types/express-jwt": "0.0.42",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.3",
+    "level": "^6.0.1",
+    "mustache": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/leveldown": "^4.0.2",
+    "@types/mustache": "^4.0.1"
+  }
+}
