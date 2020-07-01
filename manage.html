@@ -3,45 +3,97 @@
     <title>
       VixLink Management
     </title>
+    <style>
+      table.links {
+        width: 100%;
+        border: solid black;
+      }
+      table.links td {
+        border: solid grey;
+      }
+
+      table.create {
+        width: 100%;
+      }
+
+      td.url-cell {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      td.url-cell a {
+        text-overflow: ellipsis;
+      }
+
+      .toplevel {
+        max-width: 25em;
+        margin: 2em;
+      }
+
+      input#name {
+        width: 100%;
+      }
+      input#url {
+        width: 100%;
+      }
+
+      input#create {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-    <form method="post">
-      <input type="hidden" name="action" value="create" />
-      <span>
-        <label for="name">Name: </label>
-        <input type="text" name="name" id="name" required />
-      </span>
-      <span>
-        <label for="url">Target URL: </label>
-        <input type="url" name="url" id="url" required />
-      </span>
-      <span>
-        <input type="submit" value="Create" />
-      </span>
-    </form>
-    <div>
-      <table>
-        <thead>
+    <div class="toplevel">
+      <form method="post">
+        <input type="hidden" name="action" value="create" />
+        <table class="create">
           <tr>
-            <th>Name</th>
-            <th>URL</th>
-            <th>Delete</th>
+            <td><label for="name">Name: </label></td>
+            <td colspan="2">
+              <input type="text" name="name" id="name" required />
+            </td>
           </tr>
-        </thead>
-        {{#links}}
-        <tr>
-          <td>{{name}}</td>
-          <td>{{url}}</td>
-          <td>
-            <form method="post">
-              <input type="hidden" name="action" value="delete" />
-              <input type="hidden" name="name" value="{{name}}" />
-              <input type="submit" value="Delete" />
-            </form>
-          </td>
-          {{/links}}
-        </tr>
-      </table>
+          <tr>
+            <td><label for="url">Target URL: </label></td>
+            <td colspan="2">
+              <input type="url" name="url" id="url" required />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <input type="submit" id="create" value="Create" />
+            </td>
+          </tr>
+        </table>
+
+        <div></div>
+        <div></div>
+        <div></div>
+      </form>
+      <div>
+        <table class="links">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>URL</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          {{#links}}
+          <tr>
+            <td>{{name}}</td>
+            <td class="url-cell"><a href="{{url}}">{{url}}</a></td>
+            <td>
+              <form method="post">
+                <input type="hidden" name="action" value="delete" />
+                <input type="hidden" name="name" value="{{name}}" />
+                <input type="submit" value="Delete" />
+              </form>
+            </td>
+            {{/links}}
+          </tr>
+        </table>
+      </div>
     </div>
   </body>
 </html>

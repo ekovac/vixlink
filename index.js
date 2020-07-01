@@ -102,8 +102,19 @@ app.post("/", async (req, res) => {
   res.redirect("/");
 });
 
-app.get(`/*`, (req, res) => {
-  res.send(req.raw.url);
+app.get(`/*`, async (req, res) => {
+  // Trim the leading slash.
+  const name = req.raw.url.substr(1);
+  try {
+    res.redirect(await db.get(name));
+  } catch (e) {
+    if (e instanceof level.errors.NotFoundError) {
+      res.status(404).send();
+    } else {
+      console.error(e);
+      res.status(500).send();
+    }
+  }
 });
 
 initialize().then(() => {
