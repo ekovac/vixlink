@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>
+      VixLink Management
+    </title>
+  </head>
+  <body>
+    <form method="post">
+      <input type="hidden" name="action" value="create" />
+      <span>
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name" required />
+      </span>
+      <span>
+        <label for="url">Target URL: </label>
+        <input type="url" name="url" id="url" required />
+      </span>
+      <span>
+        <input type="submit" value="Create" />
+      </span>
+    </form>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>URL</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        {{#links}}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{url}}</td>
+          <td>
+            <form method="post">
+              <input type="hidden" name="action" value="delete" />
+              <input type="hidden" name="name" value="{{name}}" />
+              <input type="submit" value="Delete" />
+            </form>
+          </td>
+          {{/links}}
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
