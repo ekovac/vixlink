@@ -45,6 +45,11 @@ const initialize = async () => {
 
 app.addHook("onRequest", async (req, res) => {
   const token = req.headers[config.jwtHeader.toLowerCase()];
+  if (!token) {
+    req.jwt = {};
+    req.jwt.email = null;
+    return;
+  }
   let h;
   // Note to self, file bug with pomerium for not attaching the key ID to the token.
   const getKey = (header, callback) => {
