@@ -84,17 +84,19 @@ const getLinks = async () => {
 };
 
 app.get("/", async (req, res) => {
+  if (!req.jwt.email) {
+    res.status(403).send();
+    return;
+  }
   res
     .header("Content-Type", "text/html; charset=UTF-8")
     .send(mustache.render(manageTemplate, { links: await getLinks() }));
-  if (!req.jwt.email) {
-    res.status(403).send();
-  }
 });
 
 app.post("/", async (req, res) => {
   if (!req.jwt.email) {
     res.status(403).send();
+    return;
   }
   if (req.body.action == "delete") {
     const name = req.body.name;
